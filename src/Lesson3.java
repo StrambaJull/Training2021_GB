@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Lesson3 {
 
     public static void main(String[] args) {
-        randomNumber();
+       // randomNumber();
+        wordRandom();
     }
 
 //1. Написать программу, которая загадывает случайное число от 0 до 9 и пользователю дается 3 попытки угадать это число.
@@ -71,6 +74,7 @@ public class Lesson3 {
                 System.out.println("FINISH!");
             }
         }
+        sc.close();
     }
 
 //2. * Создать массив из слов
@@ -88,4 +92,64 @@ public class Lesson3 {
 //    Играем до тех пор, пока игрок не отгадает слово.
 //    Используем только маленькие буквы.
 
+    public static void wordRandom (){
+        String[] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry",
+    "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper",
+    "pineapple", "pumpkin", "potato"};
+        //выбор слова компом
+        Random randomWord = new Random();
+        int randomIndex = randomWord.nextInt(words.length);
+        String originalWord = words[randomIndex];
+        System.out.println(words[randomIndex]);
+        //Ответ игрока
+
+        System.out.println("Выберите слово из списка" + "\n");
+        System.out.println(Arrays.toString(words));
+        Scanner scanner = new Scanner(System.in);
+        String playerWord = scanner.nextLine();
+
+
+        int victory = 0;
+        do {
+            char[] charArr = new char[15];
+            char[] originalWordChar = originalWord.toCharArray();
+            char[] playerWordChar = playerWord.toCharArray();
+            StringBuilder newStringBuilder = new StringBuilder();
+
+            //Вывод результата
+            if(originalWord.equals(playerWord)){
+                victory = 1;
+                System.out.println("Вы угадали!");
+                break;
+            } else {
+                for (int charW = 0; charW < charArr.length; charW++) {
+                    if (charW < originalWordChar.length && charW < playerWordChar.length) {
+                        if (originalWordChar[charW] == playerWordChar[charW]) {
+                            charArr[charW] = playerWordChar[charW];
+                            newStringBuilder.append(playerWordChar[charW]);
+                        } else {
+                            charArr[charW] = '.';
+                            newStringBuilder.append('.');
+                        }
+                    } else {
+                        charArr[charW] = '.';
+                        newStringBuilder.append('.');
+                    }
+                }
+                String hint = newStringBuilder.toString();
+                System.out.println("Вами угаданы буквы: " + hint + "\n");
+            }
+
+            System.out.println("Выберите другое слово" + "\n");
+            playerWord = scanner.nextLine();
+        } while (victory == 0);
+
+
+
+
+
+
+
+
+    }
 }
