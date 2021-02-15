@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package level_1;
+
 import java.util.Arrays;
 
 public class Lesson2 {
